@@ -24,11 +24,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 16,
     borderColor: theme.borderColor,
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
   },
 
   containerItemText: {
     fontSize: theme.fontSize,
     fontWeight: theme.fontWeight,
-  }
+  },
 });
