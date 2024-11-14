@@ -30,5 +30,5 @@ const styles = StyleSheet.create({
   containerItemText: {
     fontSize: theme.fontSize,
     fontWeight: theme.fontWeight,
-  },
+  }
 });
