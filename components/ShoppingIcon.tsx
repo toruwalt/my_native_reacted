@@ -1,5 +1,7 @@
 import { TouchableOpacity, View, Alert, StyleSheet, Text, Pressable } from "react-native";
 import { theme } from "../theme";
+import Feather from '@expo/vector-icons/Feather';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 type Props = {
   name: string;
@@ -7,7 +9,7 @@ type Props = {
   darkMode?: boolean;
 }
 
-export function ShoppingList({name, isCompleted, darkMode}: Props) {
+export function ShoppingIcon({name, isCompleted, darkMode}: Props) {
     const handleDeleteClick = () => {
         Alert.alert(
           "Delete Alert",
@@ -68,7 +70,9 @@ export function ShoppingList({name, isCompleted, darkMode}: Props) {
             >
               <Text style={[
                 styles.deleteButtonText
-              ]} >Delete</Text>
+              ]} >
+                <Feather name="delete" size={24} color="black" />
+              </Text>
             </TouchableOpacity>
             <Pressable
               style={
@@ -84,7 +88,9 @@ export function ShoppingList({name, isCompleted, darkMode}: Props) {
                 }
               }
             >
-              <Text style={styles.deleteButtonText} >Trash</Text>
+              <Text style={styles.deleteButtonText}>
+                <AntDesign name="delete" size={24} color="black" />
+              </Text>
             </Pressable>
           </View>
       </View>
@@ -115,9 +121,9 @@ const styles = StyleSheet.create({
   },
 
   deleteButton: {
-    backgroundColor : theme.colorBlack,
     padding: 8,
     borderRadius: 6,
+    borderColor: theme.colorBlack,
   },
 
   deleteButtonText: {
