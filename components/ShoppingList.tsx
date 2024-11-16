@@ -3,20 +3,22 @@ import { theme } from "../theme";
 
 type Props = {
   name: string;
+  isCompleted?: boolean;
+  darkMode?: boolean;
 }
 
-export function ShoppingList({name}: Props) {
+export function ShoppingList({name, isCompleted, darkMode}: Props) {
     const handleDeleteClick = () => {
         Alert.alert(
           "Delete Alert",
-          "Do you want to delete event?",
+          `Do you want to delete ${name}?`,
           [
             {
               text: "Yes",
-              onPress: () => console.log("Item deleted"),
+              onPress: () => console.log(`${name} deleted`),
               style: "destructive",
             },
-            { text: 'NO', onPress: () => console.log('NO Pressed')
+            { text: 'NO', onPress: () => console.log('NO Pressed, ')
             },
           ],
           // These are the options.
@@ -33,7 +35,7 @@ export function ShoppingList({name}: Props) {
         Alert.alert(
           // Alert without buttons
           "Moved to Trash",
-          "This has been permanently deleted",
+          `${name} has been permanently deleted`,
           [],
           {
             cancelable: true,
@@ -43,11 +45,19 @@ export function ShoppingList({name}: Props) {
       };
     
     return (
-        <View style={styles.containerItem}>
-          <Text style={styles.containerItemText}>Buy {name}</Text>
+        <View style={[styles.containerItem,
+          isCompleted ? styles.completedContainerItem : undefined]
+          }>
+          <Text style={[
+            styles.containerItemText,
+            isCompleted ? styles.completedContainerItemText : undefined
+          ]}>Buy {name}</Text>
           <View style={styles.containerButtonsBox}>
             <TouchableOpacity 
-            style={styles.deleteButton}
+            style={[
+              styles.deleteButton,
+              isCompleted ? styles.completedDeleteButton : undefined
+            ]}
             onPress={() => 
               {
                 console.log("Delete Pressed");
@@ -56,10 +66,17 @@ export function ShoppingList({name}: Props) {
             }
             activeOpacity={0.8}
             >
-              <Text style={styles.deleteButtonText} >Delete</Text>
+              <Text style={[
+                styles.deleteButtonText
+              ]} >Delete</Text>
             </TouchableOpacity>
             <Pressable
-              style={styles.deleteButton}
+              style={
+                [
+                  styles.deleteButton,
+                  isCompleted ? styles.completedDeleteButton: undefined
+                ]
+              }
               onPress={() => 
                 {
                   console.log("Trash Pressed");
@@ -76,12 +93,6 @@ export function ShoppingList({name}: Props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colorWhite,
-    justifyContent: "center",
-  },
-
   containerItem: {
     paddingHorizontal: 8,
     paddingVertical: 16,
@@ -113,5 +124,20 @@ const styles = StyleSheet.create({
     color: theme.colorWhite,
     letterSpacing: 1,
     textTransform: "uppercase"
-  }
+  },
+  
+  //isCompleted colour scheme
+  completedContainerItem: {
+    backgroundColor: theme.greyC,
+    borderColor: theme.greyD,
+  },
+
+  completedContainerItemText: {
+    color: theme.greyA,
+    textDecorationLine: "line-through"
+  },
+
+  completedDeleteButton: {
+    backgroundColor: theme.greyA,
+  },
 });

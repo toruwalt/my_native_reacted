@@ -7,11 +7,11 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-      <ShoppingList name={"Coffee"}></ShoppingList>
-      <ShoppingList name={"Tea"}></ShoppingList>
+      <ShoppingList name="Coffee"></ShoppingList>
+      <ShoppingList name="Tea"></ShoppingList>
       <ShoppingList name="Juice"></ShoppingList>
-      <ShoppingList name="Smoothy"></ShoppingList>
-      <ShoppingList name="Soda"></ShoppingList>
+      <ShoppingList name="Smoothy" isCompleted={true}></ShoppingList>
+      <ShoppingList name="Soda" isCompleted={true}></ShoppingList>
        <StatusBar style="auto" />
     </View>
   );
@@ -22,5 +22,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: theme.colorWhite,
     justifyContent: "center",
-  }
+  },
+
+  //darkMode colour scheme
+  containerDM: {
+    flex: 1,
+    backgroundColor: theme.colorBlack,
+    justifyContent: "center",
+  },
 });
