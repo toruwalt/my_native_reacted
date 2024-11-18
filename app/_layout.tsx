@@ -10,9 +10,9 @@ export default function Layout() {
             name="index"
             options={{
                 title: "Marketplace",
-                tabBarIcon: () => {
+                tabBarIcon: ({color, size}) => {
                     return (
-                        <Entypo name="home" size={24} color="black" />
+                        <Entypo name="home" size={size} color={color} />
                     );
                 }
             }}>
@@ -22,9 +22,9 @@ export default function Layout() {
             name="pastriesScreen"
             options={{
                 title: "My Pastries",
-                tabBarIcon: () => {
+                tabBarIcon: ({color, size}) => {
                     return (
-                        <Fontisto name="sitemap" size={24} color="black" />
+                        <Fontisto name="sitemap" size={size} color={color} />
                     );
                 }
             }}>
@@ -35,9 +35,9 @@ export default function Layout() {
             name="stapleScreen"
             options={{
                 title: "My Staple",
-                tabBarIcon: () => {
+                tabBarIcon: ({color, size}) => {
                     return (
-                        <FontAwesome name="list-ul" size={24} color="black" />
+                        <FontAwesome name="list-ul" size={size} color={color} />
                     );
                 }
             }}
