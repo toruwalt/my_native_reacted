@@ -2,6 +2,7 @@ import { TouchableOpacity, View, Alert, StyleSheet, Text, Pressable } from "reac
 import { theme } from "../theme";
 import Feather from '@expo/vector-icons/Feather';
 import AntDesign from '@expo/vector-icons/AntDesign';
+import Entypo from "@expo/vector-icons/Entypo";
 
 type Props = {
   name: string;
@@ -41,7 +42,9 @@ export function ShoppingIcon({name, isCompleted, darkMode}: Props) {
           [],
           {
             cancelable: true,
-            onDismiss: () => console.log('Alert dismissed'),
+            onDismiss: () => {
+              console.log('Alert dismissed');
+            },
           }
         )
       };
@@ -50,6 +53,8 @@ export function ShoppingIcon({name, isCompleted, darkMode}: Props) {
         <View style={[styles.containerItem,
           isCompleted ? styles.completedContainerItem : undefined]
           }>
+          <Entypo name={isCompleted ? "check" : "circle"
+                } size={24} color="black" />
           <Text style={[
             styles.containerItemText,
             isCompleted ? styles.completedContainerItemText : undefined
