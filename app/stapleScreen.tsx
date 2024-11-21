@@ -15,7 +15,6 @@ export default function App() {
       <ShoppingIcon name="Beans" isCompleted={true}></ShoppingIcon>
       </View>
     </View>
-    
   );
 }
 
