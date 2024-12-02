@@ -9,7 +9,7 @@ export default function ProfileScreen() {
               Go to history
             </Text>
         </TouchableOpacity>
-        <Text style={styles.text}>Counter</Text>
+        <Text style={styles.text}>This is the main profile page</Text>
       </View>
   );
 }

@@ -14,6 +14,8 @@ export default function Layouts() {
                 title: "Profile",
                 headerRight: () => {
                     return (
+                    // If you pass a navigation within a navigation, you must
+                    // mark it asChild
                     <Link href="/user/history" asChild>
                         <Pressable hitSlop={20}>
                         <MaterialIcons
