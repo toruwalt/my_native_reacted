@@ -1,58 +1,57 @@
-import { StyleSheet, View, Text, TouchableOpacity, TextInput } from "react-native";
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, TextInput } from "react-native";
 import { theme } from "../theme";
 import { ShoppingList } from "../components/ShoppingList";
 import { Link, router, useRouter } from "expo-router";
 import { useState } from "react";
 import * as uuid from 'uuid';
 
+type ShoppingListType = {
+  id: string,
+  name: string,
+  completed: boolean
+};
+
+const initialShoppingList: ShoppingListType[] = [
+  {id: "1", name: "Coffee", completed: false},
+  {id: "2", name: "Tea", completed: false},
+  {id: "3", name: "Juice", completed: false},
+  {id: "4", name: "Smothy", completed: true},
+  {id: "5", name: "Soda", completed: true},
+  {id: "6", name: "Water", completed: false}
+];
+
 export default function App() {
   //saves the state
-  const [value, setValue] = useState("");
-  const router = useRouter();
-
-  type ShoppingListType = {
-    id: string,
-    name: string,
-    completed: boolean
-  };
-
-  const initialShoppingList: ShoppingListType[] = [
-    {id: "1", name: "Coffee", completed: false},
-    {id: "2", name: "Tea", completed: false},
-    {id: "3", name: "Juice", completed: false},
-    {id: "4", name: "Smothy", completed: true},
-    {id: "5", name: "Soda", completed: true},
-    {id: "6", name: "Water", completed: false}
-  ];
-
-  const [shoppingList, setShoppingList] = useState<ShoppingListType[]>(initialShoppingList)
+  const [shoppingList, setShoppingList] = useState(initialShoppingList)
+  const [value, setValue] = useState<string>();
 
   const handleSubmit = () => {
       if (value) {
         const newShoppingList = [
           { id: new Date().toISOString(), name: value, completed: false},
-          ...initialShoppingList,
+          ...shoppingList,
         ];
         setShoppingList(newShoppingList);
-        setValue("");
+        setValue(undefined);
       }
     };
 
 
 
   return (
-    <View style={styles.container}>
-      <Link href={"/pastriesScreen"} style={styles.menuLinks}>
-        <Text style={styles.menuHeader}>Go to Pastries</Text>
-      </Link>
-      {/* onChange */}
+    //<View style={styles.container}>
+    <ScrollView 
+      style={styles.container}
+      contentContainerStyle={styles.containerSty}
+      stickyHeaderIndices={[0]}>
+        {/* stickyHeaderIndices={[0]} makes the compoents stick to the top */}
       <TextInput
         placeholder="E.g Wine"
         value={value}
         style={styles.itemSearch}
         autoCorrect
         keyboardType="numeric"
-        onChangeText={(item) => setValue(item)}
+        onChangeText={setValue}
         returnKeyType="send"
         onSubmitEditing={handleSubmit}
         />
@@ -60,13 +59,7 @@ export default function App() {
           {shoppingList.map((item) => (
               <ShoppingList name={item.name} key={item.id} isCompleted={item.completed} />))}
       </View>
-      
-      <TouchableOpacity onPress={() => router.navigate("/stapleScreen")}>
-        <Text style={styles.menuHeader}>
-          Go to Staples
-        </Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
     
   );
 }
@@ -75,6 +68,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colorWhite,
+    padding: 12,
+  },
+
+  containerSty: {
+    paddingBottom: 24,
   },
 
   //darkMode colour scheme
@@ -99,9 +97,9 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: theme.colorBlack,
     borderWidth: 1,
-    marginHorizontal: 10,
     marginBottom: 20,
     fontSize: 18,
     paddingHorizontal: 20,
+    backgroundColor: theme.colorWhite,
   }
 });
