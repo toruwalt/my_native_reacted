@@ -1,25 +1,35 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, FlatList } from "react-native";
 import { theme } from "../theme";
 import { ShoppingIcon } from "../components/ShoppingIcon";
+import { ShoppingList } from "../components/ShoppingList";
+import { initialShoppingList } from "../app/index";
+import { useState } from "react";
+
+const testData = new Array(50)
+  .fill(null)
+  .map((_, index) => ({
+    id: String(index + 1),
+    name: `Item ${index + 1}`,
+    completed: false
+  }));
 
 export default function App() {
-  
+
   return (
     <View style={styles.container}>
-      <View>
-      <Text style={styles.menuHeader}>Pastries</Text>
-      <ShoppingIcon name="Doughnut"></ShoppingIcon>
-      <ShoppingIcon name="Meatpie"></ShoppingIcon>
-      <ShoppingIcon name="Egg Rolls" isCompleted></ShoppingIcon>
-      <ShoppingIcon name="Spring rolls" isCompleted={true}></ShoppingIcon>
-      <ShoppingIcon name="Buns" isCompleted={true}></ShoppingIcon>
-      </View>
+      <FlatList
+        data={testData}
+        renderItem={({ item }) => ( // Destructure item for cleaner access
+          <ShoppingList name={item.name} key={item.id} isCompleted={item.completed} />
+        )}
+      >
+      </FlatList>
     </View>
-    
   );
+
 }
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: theme.colorWhite,
